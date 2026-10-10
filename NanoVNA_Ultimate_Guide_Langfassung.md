@@ -1,587 +1,616 @@
-# NanoVNA für Einsteiger: Antennen richtig messen und verstehen
 
-Ein NanoVNA ist eines der nützlichsten Werkzeuge, die du deinem Funk- oder Elektronik-Arbeitsplatz hinzufügen kannst. Er hilft dir, Antennen zu prüfen und abzustimmen, Resonanzfrequenzen zu finden, das SWR über einen ganzen Frequenzbereich zu betrachten, Impedanzen sichtbar zu machen, Filter zu messen und Probleme in Kabeln oder HF-Komponenten aufzuspüren.
+# NanoVNA para principiantes: Medir y entender antenas correctamente
 
-Der NanoVNA ist klein, erschwinglich und erstaunlich leistungsfähig. Trotzdem ist er kein Gerät, das man einfach anschließt und dessen erste Anzeige automatisch die ganze Wahrheit zeigt. Für brauchbare Ergebnisse musst du den richtigen Frequenzbereich wählen, am passenden Punkt kalibrieren, den richtigen Messanschluss verwenden und verstehen, was die angezeigten Kurven bedeuten.
+Un NanoVNA es una de las herramientas más útiles que puedes añadir a tu mesa de radioafición o de electrónica. Te ayuda a comprobar y ajustar antenas, encontrar frecuencias de resonancia, observar el SWR (ROE) en todo un rango de frecuencias, visualizar impedancias, medir filtros y detectar problemas en cables o componentes de RF.
 
-Dieser Guide zeigt dir deshalb nicht jedes einzelne Menü. Er beantwortet die praktisch wichtigere Frage:
+El NanoVNA es pequeño, asequible y sorprendentemente potente. Aun así, no es un aparato que se conecta y cuya primera lectura muestra automáticamente toda la verdad. Para obtener resultados útiles, debes elegir el rango de frecuencias adecuado, calibrar en el punto correcto, usar la conexión de medición apropiada y entender lo que significan las curvas que se muestran.
 
-> **Ich sehe diese Kurve. Was bedeutet sie für meine Antenne und was muss ich als Nächstes tun?**
+Por eso, esta guía no muestra cada menú individual. Responde a la pregunta práctica más importante:
 
----
-
-## Was ist ein NanoVNA?
-
-> **GRAFIK 1:** NanoVNA-Geräteübersicht mit Anschlüssen und Bedienelementen
-
-VNA steht für „Vector Network Analyzer“, auf Deutsch Vektor-Netzwerkanalysator. Das klingt komplizierter, als es für den Einstieg sein muss.
-
-Vereinfacht gesagt sendet der NanoVNA ein sehr kleines Hochfrequenzsignal aus und misst, was mit diesem Signal passiert. Dabei erfasst er nicht nur die Stärke, sondern auch die Phasenlage des Signals. Aus diesen Informationen berechnet das Gerät unter anderem SWR, Impedanz, Return Loss und die Darstellung im Smith-Chart.
-
-Mit einem NanoVNA kannst du zum Beispiel:
-
-- eine Antenne auf ihre Resonanzfrequenz prüfen,
-- einen Dipol oder eine Vertikalantenne abstimmen,
-- die Anpassung einer Antenne an ein 50-Ohm-System beurteilen,
-- mehrere Resonanzen einer Mehrbandantenne finden,
-- Filter und Dämpfungsglieder untersuchen,
-- Veränderungen vor und nach einer Anpassung vergleichen,
-- Kabel, Stecker und andere HF-Bauteile untersuchen.
-
-Dabei solltest du realistisch bleiben. Ein NanoVNA ist kein kalibriertes Hochleistungslabor. Für Antennenbau, Amateurfunk, CB-Funk, Meshtastic, SDR-Projekte und viele Elektronikexperimente ist er jedoch ein ausgezeichnetes Werkzeug.
-
-Seine Ergebnisse sind nur so zuverlässig wie der Messaufbau. Lose Stecker, unnötig viele Adapter, ungeeignete Kabel oder eine falsche Kalibrierung können stärker auffallen als der eigentliche Prüfling. Besonders bei höheren Frequenzen sollte die Verbindungskette deshalb kurz, sauber und unverändert bleiben.
+> **Veo esta curva. ¿Qué significa para mi antena y qué debo hacer a continuación?**
 
 ---
 
-## Was misst der NanoVNA?
+## ¿Qué es un NanoVNA?
 
-> **GRAFIK 2:** NanoVNA sendet ein Signal über das Koaxkabel zur Antenne; ein Teil wird zurückgeworfen
+![Figura 1: Vista general del dispositivo NanoVNA con conexiones y controles](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/f5ada94be0.png)
 
-Wenn der NanoVNA eine Antenne prüft, sendet er ein Signal über das Koaxkabel zur Antenne.
+*Figura 1: Vista general del dispositivo NanoVNA con conexiones y controles*
 
-Eine passende Antenne nimmt einen großen Teil der zugeführten Leistung auf. Eine Fehlanpassung sorgt dagegen dafür, dass ein Teil des Signals zurück in Richtung NanoVNA reflektiert wird. Der NanoVNA misst diese Reflexion.
+VNA significa „Vector Network Analyzer", es decir, analizador de redes vectorial. Suena más complicado de lo que necesita ser para empezar.
 
-Aus derselben Grundmessung kann das Gerät verschiedene Ansichten berechnen:
+Dicho de forma sencilla, el NanoVNA emite una señal de alta frecuencia muy pequeña y mide qué le sucede a esta señal. Al hacerlo, no solo registra la intensidad, sino también la fase de la señal. Con esta información, el aparato calcula, entre otras cosas, el SWR, la impedancia, la pérdida de retorno (Return Loss) y la representación en la carta de Smith.
+
+Con un NanoVNA puedes, por ejemplo:
+
+- comprobar la frecuencia de resonancia de una antena,
+- ajustar un dipolo o una antena vertical,
+- evaluar la adaptación de una antena a un sistema de 50 ohmios,
+- encontrar varias resonancias de una antena multibanda,
+- examinar filtros y atenuadores,
+- comparar el estado antes y después de una adaptación,
+- examinar cables, conectores y otros componentes de RF.
+
+Debes mantener expectativas realistas. Un NanoVNA no es un laboratorio de alto rendimiento calibrado. Sin embargo, para la construcción de antenas, radioafición, radio CB, Meshtastic, proyectos SDR y muchos experimentos de electrónica, es una herramienta excelente.
+
+Sus resultados solo son tan fiables como la configuración de medición. Conectores flojos, adaptadores innecesarios, cables inadecuados o una calibración incorrecta pueden destacar más que el propio objeto de prueba. Especialmente a frecuencias más altas, la cadena de conexiones debe ser corta, limpia e invariable.
+
+---
+
+## ¿Qué mide el NanoVNA?
+
+![Figura 2: Flujo de señal desde el NanoVNA a través del cable coaxial hacia la antena y de vuelta](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/cd57317574.png)
+
+*Figura 2: Flujo de señal desde el NanoVNA a través del cable coaxial hacia la antena y de vuelta*
+
+Cuando el NanoVNA examina una antena, envía una señal a través del cable coaxial hacia la antena.
+
+Una antena bien adaptada absorbe gran parte de la potencia suministrada. Una desadaptación provoca, en cambio, que parte de la señal se refleje de vuelta hacia el NanoVNA. El NanoVNA mide esta reflexión.
+
+A partir de la misma medición básica, el aparato puede calcular diferentes vistas:
 
 - SWR,
-- LOGMAG beziehungsweise S11 in dB,
-- Return Loss,
-- Widerstand R,
-- Reaktanz X,
-- komplexe Impedanz R + jX,
-- Smith-Chart,
-- Phase.
+- LOGMAG o S11 en dB,
+- Return Loss (pérdida de retorno),
+- Resistencia R,
+- Reactancia X,
+- Impedancia compleja R + jX,
+- Carta de Smith,
+- Fase.
 
-Diese Anzeigen widersprechen sich nicht. Sie betrachten dasselbe elektrische Verhalten lediglich aus unterschiedlichen Blickwinkeln.
-
----
-
-## S11 und S21 richtig verstehen
-
-> **GRAFIK 3:** Vergleich zwischen S11-Reflexionsmessung und S21-Durchgangsmessung
-
-Bei vielen NanoVNA-Modellen wird der erste Anschluss als Port 1, CH0 oder S11 bezeichnet. Der zweite Anschluss trägt je nach Gerät Bezeichnungen wie Port 2, CH1 oder S21.
-
-### S11: Was kommt zurück?
-
-Für eine Antennenmessung verwendest du normalerweise Port 1.
-
-S11 beschreibt die Reflexion am Eingang. Damit lässt sich untersuchen:
-
-- wie stark eine Antenne reflektiert,
-- wie hoch das SWR ist,
-- wo eine Resonanz liegt,
-- welche Impedanz anliegt,
-- ob der Prüfling kapazitiv oder induktiv wirkt.
-
-S11 ist kein eigener physischer Anschluss im eigentlichen Sinn, sondern die Bezeichnung der Messgröße. Im praktischen Umgang kannst du dir trotzdem merken:
-
-> **Antenne an Port 1, dann S11 anzeigen.**
-
-### S21: Was kommt hindurch?
-
-Für eine Durchgangsmessung wird der Prüfling zwischen Port 1 und Port 2 angeschlossen.
-
-S21 beschreibt, wie viel Signal vom ersten zum zweiten Port gelangt. Damit lassen sich beispielsweise untersuchen:
-
-- Tiefpass-, Hochpass- und Bandpassfilter,
-- Dämpfungsglieder,
-- Koaxkabel,
-- Sperrkreise,
-- bestimmte Balun- und Mantelwellensperren-Aufbauten.
-
-Für den Einstieg gilt:
-
-> **Antennen misst du meist mit S11. Filter und Übertragungswege meist mit S21.**
+Estas indicaciones no se contradicen entre sí. Simplemente observan el mismo comportamiento eléctrico desde diferentes puntos de vista.
 
 ---
 
-## Den Frequenzbereich sinnvoll wählen
+## Entender correctamente S11 y S21
 
-Bevor du kalibrierst, stellst du den Frequenzbereich ein, den du später tatsächlich untersuchen möchtest.
+![Figura 3: Comparación entre la medición de reflexión S11 y la medición de transmisión S21](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/c7cef7afb1.png)
 
-Bei einer 40-Meter-Antenne könntest du für einen ersten Überblick beispielsweise einen Bereich rund um das 40-Meter-Band wählen. Bei einer Antenne für 868 MHz wählst du einen entsprechend passenden Bereich um die gewünschte Betriebsfrequenz.
+*Figura 3: Comparación entre la medición de reflexión S11 y la medición de transmisión S21*
 
-Ein extrem großer Frequenzbereich wirkt zwar übersichtlich, hat aber Nachteile:
+En muchos modelos de NanoVNA, la primera conexión se denomina Puerto 1, CH0 o S11. La segunda conexión lleva designaciones como Puerto 2, CH1 o S21, según el dispositivo.
 
-- schmale Resonanzen können übersehen werden,
-- einzelne Details werden schlechter dargestellt,
-- die verfügbaren Messpunkte verteilen sich über einen größeren Bereich.
+### S11: ¿Qué regresa?
 
-Ein bewährter Arbeitsablauf besteht aus zwei Schritten:
+Para una medición de antena, normalmente usas el Puerto 1.
 
-1. Zuerst einen etwas breiteren Bereich für den Überblick messen.
-2. Danach den interessanten Bereich enger einstellen und erneut kalibrieren.
+S11 describe la reflexión en la entrada. Con ello se puede investigar:
 
-Die Kalibrierung gehört zum gewählten Frequenzbereich. Wenn du Start- und Stoppfrequenz deutlich veränderst, solltest du deshalb neu kalibrieren.
+- cuánto refleja una antena,
+- cuán alto es el SWR,
+- dónde se encuentra una resonancia,
+- qué impedancia está presente,
+- si el objeto de prueba se comporta de forma capacitiva o inductiva.
 
----
+S11 no es una conexión física en sí mismo, sino la designación de la magnitud de medición. En la práctica, aun así puedes recordar:
 
-## Kalibrierung: der wichtigste Schritt
+> **Antena al Puerto 1, luego mostrar S11.**
 
-> **GRAFIK 4:** OSL-/SOLT-Kalibrierung als klarer Ablauf
+### S21: ¿Qué lo atraviesa?
 
-Eine Kalibrierung zeigt dem NanoVNA, wie sich das Messgerät, die Anschlüsse und die bis zur Referenzebene verwendete Messkette verhalten.
+Para una medición de transmisión, el objeto de prueba se conecta entre el Puerto 1 y el Puerto 2.
 
-Ohne passende Kalibrierung kann der NanoVNA nicht sauber zwischen dem Verhalten des Prüflings und den systematischen Fehlern des Messaufbaus unterscheiden.
+S21 describe cuánta señal llega del primer puerto al segundo. Con ello se pueden examinar, por ejemplo:
 
-### Für Antennen: Open, Short und Load
+- filtros paso bajo, paso alto y paso banda,
+- atenuadores,
+- cables coaxiales,
+- circuitos de bloqueo (traps),
+- ciertas construcciones de baluns y choques de modo común.
 
-Für eine reine S11-Antennenmessung genügt normalerweise eine Ein-Port-Kalibrierung mit:
+Para empezar, se aplica:
 
-1. **Open:** offener Abschluss,
-2. **Short:** Kurzschluss,
-3. **Load:** möglichst genauer 50-Ohm-Abschluss.
-
-Dieses Verfahren wird auch OSL-Kalibrierung genannt.
-
-Der vereinfachte Ablauf lautet:
-
-1. Gewünschten Frequenzbereich einstellen.
-2. Alte Kalibrierung zurücksetzen.
-3. Open an der späteren Referenzebene anschließen und messen.
-4. Short anschließen und messen.
-5. 50-Ohm-Load anschließen und messen.
-6. Kalibrierung abschließen und speichern.
-7. Prüfen, ob die Korrektur aktiv ist.
-
-### Für Durchgangsmessungen: zusätzlich Thru
-
-Wenn du S21 messen möchtest, benötigst du zusätzlich einen definierten Durchgang zwischen den beiden Ports. Dieser Schritt heißt **Thru**.
-
-Open, Short, Load und Thru werden gemeinsam oft als SOLT-Kalibrierung bezeichnet. Thru ist für eine einfache S11-Antennenmessung meist nicht erforderlich, kann aber je nach NanoVNA-Modell und Firmware trotzdem Teil des angebotenen Kalibriervorgangs sein. Die Menüführung unterscheidet sich zwischen Geräten und Firmwareversionen.
-
-### Nach der Kalibrierung nichts mehr verändern
-
-Ein wichtiger Grundsatz lautet:
-
-> **Alles, was sich zwischen Kalibrierung und Messung ändert, kann die Kalibrierung entwerten.**
-
-Wenn du nachträglich einen Adapter, ein anderes Kabel oder einen zusätzlichen Verbinder einfügst, solltest du neu kalibrieren.
-
-Auch die Stecker sollten während der Messung fest sitzen. Sie dürfen nicht wackeln, sollten aber ebenfalls nicht mit Gewalt angezogen werden.
+> **Las antenas generalmente se miden con S11. Los filtros y las vías de transmisión, generalmente con S21.**
 
 ---
 
-## Die Referenzebene verstehen
+## Elegir sensatamente el rango de frecuencias
 
-> **GRAFIK 5:** Kalibrierung direkt am Gerät im Vergleich zur Kalibrierung am Ende des Messkabels
+Antes de calibrar, ajustas el rango de frecuencias que realmente deseas examinar después.
 
-Die Referenzebene ist der Punkt, ab dem dein Messergebnis gelten soll.
+Para una antena de 40 metros, por ejemplo, podrías elegir para una primera visión general un rango alrededor de la banda de 40 metros. Para una antena de 868 MHz, eliges un rango correspondientemente adecuado alrededor de la frecuencia de operación deseada.
 
-Kalibrierst du direkt am NanoVNA-Port und schließt danach ein Messkabel und mehrere Adapter an, gehören Kabel und Adapter zur gemessenen Anordnung. Sie können die angezeigte Impedanz verändern und zusätzliche Verluste oder Fehlanpassungen einbringen.
+Un rango de frecuencias extremadamente amplio parece claro, pero tiene desventajas:
 
-Kalibrierst du dagegen mit der vollständigen Messkette und setzt Open, Short und Load an deren Ende an, verschiebst du die Referenzebene an das Ende dieser Messkette.
+- las resonancias estrechas pueden pasarse por alto,
+- los detalles individuales se representan peor,
+- los puntos de medición disponibles se distribuyen en un rango mayor.
 
-Für das genaue Abstimmen einer Antenne ist die ideale Referenzebene möglichst nahe am Speisepunkt der Antenne.
+Un flujo de trabajo probado consta de dos pasos:
 
-In der Praxis ist dieser Punkt nicht immer leicht erreichbar. Dann gibt es zwei Möglichkeiten:
+1. Primero medir un rango algo más amplio para la visión general.
+2. Después ajustar el rango interesante de forma más estrecha y calibrar de nuevo.
 
-- den NanoVNA möglichst nahe zur Antenne bringen,
-- oder eine feste, bekannte Messkette verwenden und immer unter denselben Bedingungen messen.
-
-Wenn du am unteren Ende eines langen Koaxkabels misst, siehst du nicht ausschließlich die Antenne. Das Kabel transformiert die Impedanz, bringt Dämpfung mit und kann das Messergebnis glatter oder günstiger erscheinen lassen, als die Anpassung direkt am Speisepunkt tatsächlich ist.
+La calibración pertenece al rango de frecuencias elegido. Si cambias significativamente las frecuencias de inicio y de parada, debes calibrar de nuevo.
 
 ---
 
-## Die erste Antenne messen
+## Calibración: el paso más importante
 
-> **GRAFIK 6:** NanoVNA-Bildschirm mit Frequenzbereich, Trace, Marker und markiertem Minimum
+![Figura 4: Calibración OSL y SOLT como un proceso claro](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/8689768173.png)
 
-Nach der Kalibrierung entfernst du den Kalibrierstandard und schließt die Antenne an, ohne die restliche Messkette zu verändern.
+*Figura 4: Calibración OSL y SOLT como un proceso claro*
 
-Wähle zunächst eine leicht verständliche Darstellung. Für den ersten Überblick eignen sich:
+Una calibración le muestra al NanoVNA cómo se comportan el aparato de medición, las conexiones y la cadena de medición utilizada hasta el plano de referencia.
+
+Sin una calibración adecuada, el NanoVNA no puede distinguir limpiamente entre el comportamiento del objeto de prueba y los errores sistemáticos de la configuración de medición.
+
+### Para antenas: Open, Short y Load
+
+Para una medición de antena puramente S11, normalmente basta una calibración de un puerto con:
+
+1. **Open:** terminación abierta,
+2. **Short:** cortocircuito,
+3. **Load:** terminación de 50 ohmios lo más precisa posible.
+
+Este procedimiento también se denomina calibración OSL.
+
+El procedimiento simplificado es:
+
+1. Ajustar el rango de frecuencias deseado.
+2. Restablecer la calibración anterior.
+3. Conectar Open en el futuro plano de referencia y medir.
+4. Conectar Short y medir.
+5. Conectar la carga de 50 ohmios y medir.
+6. Finalizar y guardar la calibración.
+7. Comprobar que la corrección está activa.
+
+### Para mediciones de transmisión: además Thru
+
+Si deseas medir S21, necesitas adicionalmente una transmisión definida entre los dos puertos. Este paso se llama **Thru**.
+
+Open, Short, Load y Thru se denominan conjuntamente calibración SOLT. Thru generalmente no es necesario para una medición simple de antena S11, pero según el modelo de NanoVNA y el firmware puede ser parte del proceso de calibración ofrecido. La estructura de menús difiere entre dispositivos y versiones de firmware.
+
+### Después de la calibración, no cambiar nada más
+
+Un principio importante es:
+
+> **Todo lo que cambia entre la calibración y la medición puede invalidar la calibración.**
+
+Si insertas posteriormente un adaptador, otro cable o un conector adicional, debes calibrar de nuevo.
+
+Los conectores también deben estar firmes durante la medición. No deben moverse, pero tampoco deben apretarse con fuerza.
+
+---
+
+## Entender el plano de referencia
+
+![Figura 5: Comparación entre la calibración en el aparato y al final del cable de medición](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/31166bb5d8.png)
+
+*Figura 5: Comparación entre la calibración en el aparato y al final del cable de medición*
+
+El plano de referencia es el punto a partir del cual debe valer tu resultado de medición.
+
+Si calibras directamente en el puerto del NanoVNA y luego conectas un cable de medición y varios adaptadores, el cable y los adaptadores forman parte de la configuración medida. Pueden modificar la impedancia mostrada e introducir pérdidas adicionales o desadaptaciones.
+
+Si, por el contrario, calibras con la cadena de medición completa y colocas Open, Short y Load al final de esta, desplazas el plano de referencia al final de esa cadena de medición.
+
+Para el ajuste preciso de una antena, el plano de referencia ideal está lo más cerca posible del punto de alimentación de la antena.
+
+En la práctica, este punto no siempre es fácilmente accesible. Entonces hay dos opciones:
+
+- acercar el NanoVNA lo máximo posible a la antena,
+- o usar una cadena de medición fija y conocida y medir siempre bajo las mismas condiciones.
+
+Si mides en el extremo inferior de un cable coaxial largo, no ves únicamente la antena. El cable transforma la impedancia, introduce atenuación y puede hacer que el resultado de medición parezca más suave o más favorable de lo que realmente es la adaptación directamente en el punto de alimentación.
+
+---
+
+## Medir la primera antena
+
+![Figura 6: Pantalla del NanoVNA con rango de frecuencias, traza, marcador y punto de resonancia](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/1e60b1a9cb.png)
+
+*Figura 6: Pantalla del NanoVNA con rango de frecuencias, traza, marcador y punto de resonancia*
+
+Después de la calibración, retiras el estándar de calibración y conectas la antena sin alterar el resto de la cadena de medición.
+
+Elige primero una representación fácilmente comprensible. Para la primera visión general son adecuados:
 
 - SWR,
 - S11 LOGMAG,
-- Smith-Chart.
+- Carta de Smith.
 
-Aktiviere einen Marker und bewege ihn entlang der Kurve. Der Marker zeigt dir die Frequenz und den Messwert an der ausgewählten Stelle.
+Activa un marcador y muévelo a lo largo de la curva. El marcador te muestra la frecuencia y el valor de medición en el punto seleccionado.
 
-Suche nicht einfach nur den tiefsten Punkt der gesamten Anzeige. Prüfe vielmehr:
+No busques simplemente el punto más bajo de toda la pantalla. Comprueba más bien:
 
-- Liegt das Minimum im gewünschten Frequenzbereich?
-- Wie hoch ist das SWR an deiner Betriebsfrequenz?
-- Wie tief ist S11 LOGMAG?
-- Welche Impedanz zeigt der Marker?
-- Liegt die Reaktanz X nahe null?
+- ¿Está el mínimo en el rango de frecuencias deseado?
+- ¿Cuán alto es el SWR en tu frecuencia de operación?
+- ¿Cuán profundo es el S11 LOGMAG?
+- ¿Qué impedancia muestra el marcador?
+- ¿Está la reactancia X cerca de cero?
 
-Erst die Kombination dieser Informationen ergibt ein brauchbares Bild.
-
----
-
-## SWR richtig verstehen
-
-> **GRAFIK 7:** SWR-Kurven mit abgestufter Bewertung
-
-SWR steht für „Standing Wave Ratio“, auf Deutsch Stehwellenverhältnis.
-
-Das SWR beschreibt die Stärke der Fehlanpassung zwischen der angeschlossenen Last und dem Bezugssystem des Messgeräts, normalerweise 50 Ohm.
-
-Ein SWR von 1:1 ist der theoretische Idealfall. In der Praxis ist ein extrem niedriger Wert jedoch nicht immer notwendig.
-
-Als grobe Orientierung:
-
-- **1,0 bis 1,2:** ausgezeichnet,
-- **1,2 bis 1,5:** sehr gut,
-- **1,5 bis 2,0:** für viele Anwendungen gut,
-- **2,0 bis 3,0:** je nach Funkgerät und Anwendung möglicherweise noch nutzbar,
-- **über 3,0:** genauer prüfen.
-
-Diese Einteilung ist keine universelle Freigabe. Welche Werte zulässig sind, hängt auch vom Sender, der gewünschten Frequenzspanne und der Anwendung ab.
-
-Wichtig ist außerdem:
-
-> **Ein gutes SWR beweist nur eine gute Anpassung. Es beweist nicht automatisch, dass eine Antenne die zugeführte Leistung wirksam abstrahlt.**
-
-Ein Abschlusswiderstand kann beispielsweise hervorragend angepasst sein, ist aber trotzdem keine gute Funkantenne. Auch Kabelverluste können ein SWR am Messgerät künstlich verbessern.
-
-SWR ist deshalb ein guter Einstieg, aber nicht die vollständige Diagnose.
+Solo la combinación de esta información da una imagen útil.
 
 ---
 
-## LOGMAG: die Reflexion in dB
+## Entender correctamente el SWR
 
-> **GRAFIK 8:** Dieselbe Messung als SWR- und S11-LOGMAG-Darstellung
+![Figura 7: Curvas de SWR con evaluación escalonada](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/fb7f355b71.png)
 
-LOGMAG steht für logarithmische Betragsdarstellung. Bei einer S11-Messung zeigt LOGMAG den Betrag des Reflexionsfaktors in Dezibel an.
+*Figura 7: Curvas de SWR con evaluación escalonada*
 
-Typische S11-LOGMAG-Werte sind negativ:
+SWR significa „Standing Wave Ratio" (relación de onda estacionaria).
 
-- **0 dB:** vollständige Reflexion,
-- **-6 dB:** deutliche Reflexion,
-- **-10 dB:** häufig ein brauchbarer Ausgangspunkt,
-- **-15 dB:** gute Anpassung,
-- **-20 dB:** sehr gute Anpassung,
-- **-30 dB:** ausgezeichnete Anpassung, sofern die Messung und Kalibrierung diese Genauigkeit zuverlässig hergeben.
+El SWR describe el grado de desadaptación entre la carga conectada y el sistema de referencia del aparato de medición, normalmente 50 ohmios.
 
-Je negativer der S11-LOGMAG-Wert, desto kleiner ist die gemessene Reflexion.
+Un SWR de 1:1 es el caso ideal teórico. En la práctica, un valor extremadamente bajo no siempre es necesario.
 
-### LOGMAG und Return Loss sind eng verwandt
+Como orientación general:
 
-Hier ist eine saubere Begriffsunterscheidung wichtig:
+- **1,0 a 1,2:** excelente,
+- **1,2 a 1,5:** muy bueno,
+- **1,5 a 2,0:** bueno para muchas aplicaciones,
+- **2,0 a 3,0:** posiblemente aún utilizable, según el equipo de radio y la aplicación,
+- **más de 3,0:** examinar con detalle.
 
-- **S11 LOGMAG** wird üblicherweise als negativer dB-Wert dargestellt, zum Beispiel **-20 dB**.
-- **Return Loss** wird als positiver Betrag angegeben, im gleichen Beispiel also **20 dB**.
+Esta clasificación no es una autorización universal. Qué valores son admisibles depende también del transmisor, del rango de frecuencias deseado y de la aplicación.
 
-Beide Größen beschreiben dieselbe Reflexion mit umgekehrtem Vorzeichen.
+Además, es importante:
 
-LOGMAG ersetzt das SWR nicht. Es stellt dieselbe Reflexionsinformation lediglich auf einer logarithmischen Skala dar. Der Vorteil liegt in der Darstellung: Kleine Unterschiede guter Anpassungen lassen sich in dB häufig besser vergleichen als auf einer SWR-Skala.
+> **Un buen SWR solo demuestra una buena adaptación. No demuestra automáticamente que una antena irradie de manera efectiva la potencia suministrada.**
 
-Beispielsweise entsprechen ungefähr:
+Una resistencia de carga, por ejemplo, puede estar perfectamente adaptada, pero aun así no es una buena antena de radio. Las pérdidas del cable también pueden mejorar artificialmente el SWR en el aparato de medición.
 
-- 10 dB Return Loss einem SWR von 1,92,
-- 15 dB Return Loss einem SWR von 1,43,
-- 20 dB Return Loss einem SWR von 1,22.
-
-Deshalb ist LOGMAG besonders nützlich, wenn du Resonanzstellen, Nebenresonanzen oder kleine Vorher-Nachher-Unterschiede vergleichen möchtest.
+El SWR es, por tanto, un buen punto de partida, pero no el diagnóstico completo.
 
 ---
 
-## Widerstand und Reaktanz
+## LOGMAG: la reflexión en dB
 
-> **GRAFIK 10:** R und X mit kapazitivem, resonantem und induktivem Bereich
+![Figura 8: La misma medición de antena como representación de SWR y S11 LOGMAG](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/227c266879.png)
 
-Die Impedanz einer Antenne besteht aus zwei Anteilen:
+*Figura 8: La misma medición de antena como representación de SWR y S11 LOGMAG*
+
+LOGMAG significa representación logarítmica del módulo. En una medición S11, LOGMAG muestra el módulo del factor de reflexión en decibelios.
+
+Los valores típicos de S11 LOGMAG son negativos:
+
+- **0 dB:** reflexión completa,
+- **-6 dB:** reflexión notable,
+- **-10 dB:** frecuentemente un punto de partida utilizable,
+- **-15 dB:** buena adaptación,
+- **-20 dB:** muy buena adaptación,
+- **-30 dB:** adaptación excelente, siempre que la medición y la calibración respalden de forma fiable esta precisión.
+
+Cuanto más negativo es el valor de S11 LOGMAG, menor es la reflexión medida.
+
+### LOGMAG y Return Loss están estrechamente relacionados
+
+Aquí es importante una distinción conceptual clara:
+
+- **S11 LOGMAG** se representa habitualmente como valor negativo en dB, por ejemplo **-20 dB**.
+- **Return Loss** (pérdida de retorno) se indica como valor positivo, en el mismo ejemplo, es decir, **20 dB**.
+
+Ambas magnitudes describen la misma reflexión con el signo opuesto.
+
+LOGMAG no reemplaza al SWR. Simplemente representa la misma información de reflexión en una escala logarítmica. La ventaja está en la representación: pequeñas diferencias entre buenas adaptaciones suelen compararse mejor en dB que en una escala de SWR.
+
+Por ejemplo, aproximadamente corresponden:
+
+- 10 dB de Return Loss a un SWR de 1,92,
+- 15 dB de Return Loss a un SWR de 1,43,
+- 20 dB de Return Loss a un SWR de 1,22.
+
+Por eso LOGMAG es especialmente útil cuando deseas comparar puntos de resonancia, resonancias secundarias o pequeñas diferencias entre el antes y el después.
+
+---
+
+## Resistencia y reactancia
+
+![Figura 10: Resistencia y reactancia en la zona capacitiva, resonante e inductiva](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/90f3b22d16.png)
+
+*Figura 10: Resistencia y reactancia en la zona capacitiva, resonante e inductiva*
+
+La impedancia de una antena consta de dos componentes:
 
 > **Z = R + jX**
 
-Dabei ist:
+donde:
 
-- **R** der ohmsche Anteil,
-- **X** der reaktive Anteil.
+- **R** es la componente óhmica,
+- **X** es la componente reactiva.
 
-In einem 50-Ohm-System ist eine Impedanz nahe **50 + j0 Ohm** sehr gut angepasst.
+En un sistema de 50 ohmios, una impedancia cercana a **50 + j0 ohmios** está muy bien adaptada.
 
-### Widerstand R
+### Resistencia R
 
-Ein Wert von 50 Ohm ist am Zielpunkt ideal für ein 50-Ohm-System. Ein abweichender Widerstand bedeutet jedoch nicht automatisch, dass die Antenne unbrauchbar ist. Die Anpassung kann gegebenenfalls mit einem geeigneten Netzwerk oder Transformator verbessert werden.
+Un valor de 50 ohmios es ideal en el punto objetivo para un sistema de 50 ohmios. Sin embargo, una resistencia diferente no significa automáticamente que la antena sea inutilizable. La adaptación puede, en su caso, mejorarse con una red o un transformador adecuados.
 
-### Reaktanz X
+### Reactancia X
 
-Die Reaktanz zeigt, ob die Impedanz an der betrachteten Frequenz kapazitiv oder induktiv ist:
+La reactancia indica si la impedancia en la frecuencia considerada es capacitiva o inductiva:
 
-- **X < 0:** kapazitiv,
-- **X = 0:** rein ohmisch beziehungsweise resonant,
-- **X > 0:** induktiv.
+- **X < 0:** capacitiva,
+- **X = 0:** puramente óhmica, es decir, resonante,
+- **X > 0:** inductiva.
 
-Die Aussage „X negativ bedeutet Antenne zu kurz“ beziehungsweise „X positiv bedeutet Antenne zu lang“ ist nur als vereinfachte Orientierung bei bestimmten einfachen Antennen in der Nähe ihrer gewünschten Resonanz brauchbar. Bei Mehrbandantennen, geladenen Antennen, Anpassnetzwerken und Leitungstransformationen kann diese Regel in die Irre führen.
+La afirmación „X negativa significa que la antena es demasiado corta" o „X positiva significa que la antena es demasiado larga" solo es útil como orientación simplificada para ciertas antenas simples cerca de su resonancia deseada. Con antenas multibanda, antenas cargadas, redes de adaptación y transformaciones de línea, esta regla puede llevar a confusión.
 
-Die sicherere Vorgehensweise lautet:
+El procedimiento más seguro es:
 
-1. Resonanzfrequenz bestimmen.
-2. Mit der gewünschten Betriebsfrequenz vergleichen.
-3. Erst daraus ableiten, ob ein einfacher Strahler länger oder kürzer werden muss.
-
----
-
-## Smith-Chart ohne Angst
-
-> **GRAFIK 11:** Vereinfachter Smith-Chart mit markierter Mitte sowie induktivem und kapazitivem Bereich
-
-Der Smith-Chart fasst Widerstand und Reaktanz in einer einzigen Darstellung zusammen.
-
-Für den Einstieg reichen vier Regeln:
-
-- **Mitte:** 50 Ohm und keine Reaktanz, also 50 + j0 Ohm,
-- **oberhalb der waagerechten Mittellinie:** induktiv,
-- **unterhalb der Mittellinie:** kapazitiv,
-- **je näher am Mittelpunkt:** desto besser die Anpassung an 50 Ohm.
-
-Entlang der waagerechten Mittellinie ist X gleich null. Links vom Mittelpunkt liegt der ohmsche Widerstand unter 50 Ohm, rechts davon über 50 Ohm.
-
-Der Smith-Chart zeigt außerdem etwas, das SWR allein nicht verrät: Zwei Messpunkte können dasselbe SWR haben, aber völlig unterschiedliche Impedanzen besitzen. Der Smith-Chart zeigt dir, in welche Richtung du dich vom Mittelpunkt entfernst.
-
-Für die ersten Messungen musst du keine Kreise berechnen. Beobachte einfach, wo der Marker liegt und wie er sich bei einer Änderung der Antenne bewegt.
+1. Determinar la frecuencia de resonancia.
+2. Compararla con la frecuencia de operación deseada.
+3. Solo a partir de ello deducir si un radiador simple debe hacerse más largo o más corto.
 
 ---
 
-## Resonanz finden und Bandbreite beurteilen
+## La carta de Smith sin miedo
 
-> **GRAFIK 9:** Resonanz zu niedrig, im Ziel und zu hoch
+![Figura 11: Carta de Smith simplificada para principiantes](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/5083222b9c.png)
 
-Eine Resonanz liegt dort, wo die Reaktanz X durch null geht. Bei einer einfachen, verlustarmen Antenne liegt dort häufig auch ein SWR-Minimum beziehungsweise ein deutliches Minimum im S11-LOGMAG-Trace.
+*Figura 11: Carta de Smith simplificada para principiantes*
 
-Diese Punkte müssen jedoch nicht immer exakt zusammenfallen. Eine Antenne kann bei X = 0 resonant sein und trotzdem einen Widerstand deutlich über oder unter 50 Ohm haben. Dann ist die Antenne resonant, aber nicht optimal angepasst.
+La carta de Smith combina la resistencia y la reactancia en una única representación.
 
-Prüfe deshalb am Marker immer gemeinsam:
+Para empezar, bastan cuatro reglas:
 
-- Frequenz,
+- **Centro:** 50 ohmios y sin reactancia, es decir, 50 + j0 ohmios,
+- **por encima de la línea horizontal central:** inductivo,
+- **por debajo de la línea central:** capacitivo,
+- **cuanto más cerca del punto central:** mejor la adaptación a 50 ohmios.
+
+A lo largo de la línea horizontal central, X es igual a cero. A la izquierda del punto central, la resistencia óhmica está por debajo de 50 ohmios; a la derecha, por encima de 50 ohmios.
+
+La carta de Smith también muestra algo que el SWR por sí solo no revela: dos puntos de medición pueden tener el mismo SWR pero poseer impedancias completamente diferentes. La carta de Smith te muestra en qué dirección te alejas del punto central.
+
+Para las primeras mediciones no necesitas calcular círculos. Simplemente observa dónde está el marcador y cómo se mueve cuando realizas un cambio en la antena.
+
+---
+
+## Encontrar la resonancia y evaluar el ancho de banda
+
+![Figura 9: Resonancia demasiado baja, en el objetivo y demasiado alta](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/b4a385e38d.png)
+
+*Figura 9: Resonancia demasiado baja, en el objetivo y demasiado alta*
+
+Existe una resonancia donde la reactancia X pasa por cero. En una antena simple y de bajas pérdidas, allí suele haber también un mínimo de SWR o un mínimo claro en la traza de S11 LOGMAG.
+
+Sin embargo, estos puntos no siempre coinciden exactamente. Una antena puede ser resonante con X = 0 y aun así tener una resistencia claramente superior o inferior a 50 ohmios. Entonces la antena es resonante, pero no está óptimamente adaptada.
+
+Por eso, comprueba siempre en el marcador en conjunto:
+
+- Frecuencia,
 - SWR,
 - S11 LOGMAG,
 - R,
 - X,
-- Position im Smith-Chart.
+- Posición en la carta de Smith.
 
-### Bandbreite ist kein bloßer Kurveneindruck
+### El ancho de banda no es solo una impresión de la curva
 
-Die Bandbreite bezeichnet den Frequenzbereich, in dem ein festgelegtes Kriterium eingehalten wird. Das kann beispielsweise sein:
+El ancho de banda designa el rango de frecuencias en el que se cumple un criterio definido. Esto puede ser, por ejemplo:
 
-- SWR kleiner als 2:1,
-- Return Loss größer als 10 dB,
-- S11 LOGMAG kleiner als -10 dB.
+- SWR menor que 2:1,
+- Return Loss mayor que 10 dB,
+- S11 LOGMAG menor que -10 dB.
 
-Setze zwei Marker an die beiden Grenzpunkte. Die Frequenzdifferenz zwischen diesen Markern ist die Bandbreite nach dem gewählten Kriterium.
+Coloca dos marcadores en los dos puntos límite. La diferencia de frecuencia entre estos marcadores es el ancho de banda según el criterio elegido.
 
-Eine schmale Kurve ist nicht automatisch schlecht und eine breite Kurve nicht automatisch gut. Die benötigte Bandbreite hängt von der Anwendung ab. Verluste können eine Kurve außerdem verbreitern, ohne die Antenne besser zu machen.
-
----
-
-## Einen Dipol abstimmen
-
-> **GRAFIK 12:** Dipol vor und nach dem vorsichtigen Kürzen
-
-Bei einem einfachen, mittig gespeisten Dipol gilt als praktische Grundregel:
-
-- Liegt die Resonanz **unterhalb** der gewünschten Frequenz, ist der Dipol meist zu lang.
-- Liegt die Resonanz **oberhalb** der gewünschten Frequenz, ist der Dipol meist zu kurz.
-
-Angenommen, der Dipol soll bei 7,1 MHz arbeiten, die Resonanz liegt aber bei 6,8 MHz. Dann ist der Dipol zu lang.
-
-Kürze beide Schenkel gleichmäßig und nur in kleinen Schritten. Danach misst du erneut.
-
-Wichtig:
-
-> **Abschneiden ist endgültig. Umlegen oder Zurückfalten ist für den ersten Abgleich sicherer.**
-
-Der praktische Ablauf lautet:
-
-1. Antenne in der später vorgesehenen Höhe und Umgebung aufbauen.
-2. Resonanz messen.
-3. Beide Seiten gleichmäßig und vorsichtig verändern.
-4. Antenne wieder in die ursprüngliche Position bringen.
-5. Erneut messen.
-6. Vorher- und Nachher-Kurve vergleichen.
-
-Berühre die Antenne während der Messung nicht. Auch Hände, Leitern, Metallteile und Gebäude in der Nähe können das Ergebnis verändern.
+Una curva estrecha no es automáticamente mala y una curva ancha no es automáticamente buena. El ancho de banda necesario depende de la aplicación. Además, las pérdidas pueden ensanchar una curva sin que la antena sea mejor.
 
 ---
 
-## EndFed- und Mehrbandantennen
+## Ajustar un dipolo
 
-Eine EndFed besitzt häufig mehrere nutzbare Resonanzen. Ein breiter Sweep kann dir zunächst zeigen, wo diese Resonanzen liegen. Danach betrachtest du jedes gewünschte Band in einem engeren Frequenzbereich.
+![Figura 12: Dipolo antes y después del ajuste cuidadoso](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/2e604b30c7.png)
 
-Achte darauf, dass eine Veränderung an einer Stelle mehrere Bänder beeinflussen kann. Bei einer Mehrbandantenne solltest du deshalb nach jeder Änderung alle gewünschten Frequenzbereiche kontrollieren.
+*Figura 12: Dipolo antes y después del ajuste cuidadoso*
 
-Bei einer EndFed beeinflussen außerdem unter anderem:
+Para un dipolo simple alimentado en el centro, se aplica como regla práctica:
 
-- Transformator,
-- Strahlerlänge,
-- Aufbauform,
-- Höhe,
-- Gegengewicht,
-- Speiseleitung,
-- mögliche Gleichtaktströme
+- Si la resonancia está **por debajo** de la frecuencia deseada, el dipolo suele ser demasiado largo.
+- Si la resonancia está **por encima** de la frecuencia deseada, el dipolo suele ser demasiado corto.
 
-das Messergebnis. Ein einziges SWR-Minimum reicht deshalb nicht für eine vollständige Beurteilung.
+Supongamos que el dipolo debe funcionar a 7,1 MHz, pero la resonancia está a 6,8 MHz. Entonces el dipolo es demasiado largo.
 
----
+Acorta ambos brazos de manera uniforme y solo en pequeños pasos. Después mides de nuevo.
 
-## Vertikalantennen
+Importante:
 
-Bei Vertikalantennen gehören Radials oder eine andere Form des Gegengewichts zum Gesamtsystem.
+> **Cortar es definitivo. Doblar o replegar es más seguro para el primer ajuste.**
 
-Veränderungen an:
+El procedimiento práctico es:
 
-- Anzahl,
-- Länge,
-- Winkel,
-- Höhe,
-- Bodenabstand,
-- Umgebung
+1. Construir la antena a la altura y en el entorno previstos posteriormente.
+2. Medir la resonancia.
+3. Modificar ambos lados de manera uniforme y cuidadosa.
+4. Volver a colocar la antena en su posición original.
+5. Medir de nuevo.
+6. Comparar las curvas de antes y después.
 
-können Resonanz und Impedanz verändern.
-
-Miss die Antenne möglichst in ihrer späteren Einbausituation. Eine Vertikalantenne auf dem Arbeitstisch kann sich deutlich anders verhalten als am endgültigen Montageort.
+No toques la antena durante la medición. También las manos, las escaleras, las piezas metálicas y los edificios cercanos pueden alterar el resultado.
 
 ---
 
-## Koaxkabel, Stecker und Filter prüfen
+## Antenas EndFed y multibanda
 
-Für die reine Durchgangsdämpfung eines Kabels oder Filters verwendest du S21. Der Prüfling wird zwischen Port 1 und Port 2 angeschlossen.
+Una EndFed suele tener varias resonancias utilizables. Un barrido amplio puede mostrarte primero dónde están estas resonancias. Después examinas cada banda deseada en un rango de frecuencias más estrecho.
 
-Dafür brauchst du eine geeignete Zwei-Port-Kalibrierung mit einem definierten Thru.
+Ten en cuenta que un cambio en un solo punto puede afectar a varias bandas. Por eso, con una antena multibanda debes comprobar todos los rangos de frecuencias deseados después de cada cambio.
 
-### Filter
+En una EndFed influyen, además, entre otros:
 
-Bei einem Filter zeigt S21 LOGMAG:
+- el transformador,
+- la longitud del radiador,
+- la forma de construcción,
+- la altura,
+- el contrapeso,
+- la línea de alimentación,
+- posibles corrientes de modo común
 
-- den Durchlassbereich,
-- den Sperrbereich,
-- die Einfügedämpfung,
-- Übergänge und Grenzfrequenzen,
-- gegebenenfalls unerwünschte Nebenbereiche.
-
-### Koaxkabel
-
-Bei einem Kabel kannst du mit einer geeigneten S21-Messung die Durchgangsdämpfung über der Frequenz betrachten. Ein einfacher S21-Sweep sagt jedoch nicht automatisch, an welcher Stelle ein Kabel beschädigt ist. Für eine Ortsbestimmung sind zusätzliche Verfahren wie eine Zeitbereichsdarstellung und ein bekannter Verkürzungsfaktor erforderlich.
-
-### Stecker und Adapter
-
-Wenn sich die Kurve verändert, sobald du einen Stecker leicht berührst, steckt oft ein mechanisches Problem dahinter:
-
-- loser Kontakt,
-- beschädigte Buchse,
-- verschmutzte Verbindung,
-- ungeeigneter Adapter,
-- mechanische Belastung des NanoVNA-Ports.
-
-Halte die Adapterkette so kurz und so konstant wie möglich.
+en el resultado de medición. Un solo mínimo de SWR no basta, por tanto, para una evaluación completa.
 
 ---
 
-## Messergebnisse richtig deuten
+## Antenas verticales
 
-Eine einzelne schöne Kurve ist noch keine vollständige Diagnose.
+En las antenas verticales, los radiales u otra forma de contrapeso forman parte del sistema completo.
 
-### Gute Resonanz, aber schlechtes SWR
+Cambios en:
 
-Eine Antenne kann resonant sein, weil X nahe null liegt, aber trotzdem einen Widerstand besitzen, der deutlich von 50 Ohm abweicht.
+- el número,
+- la longitud,
+- el ángulo,
+- la altura,
+- la distancia al suelo,
+- el entorno
 
-Dann ist die Antenne zwar resonant, aber nicht gut an das 50-Ohm-System angepasst.
+pueden modificar la resonancia y la impedancia.
 
-### Gutes SWR, aber schlechte Antenne
-
-Ein niedriges SWR kann auch durch Verluste entstehen. Ein verlustreiches Kabel oder ein ungeeigneter Aufbau kann reflektierte Energie dämpfen und dadurch die Anzeige am Messgerät verbessern.
-
-Das Messgerät sieht dann eine gute Anpassung, aber nicht zwingend eine wirksame Abstrahlung.
-
-### Mehrere Minima
-
-Mehrere Minima können auf verschiedene Resonanzen hinweisen. Das ist bei Mehrbandantennen oft erwünscht. Es kann aber auch durch Aufbau, Leitungen, Umgebung oder unerwünschte Resonanzen entstehen.
-
-Betrachte deshalb nicht nur die Tiefe eines Minimums, sondern auch:
-
-- seine Frequenz,
-- die Impedanz am Marker,
-- die Position im Smith-Chart,
-- die Wiederholbarkeit der Messung.
+Mide la antena, si es posible, en su situación de instalación posterior. Una antena vertical sobre la mesa de trabajo puede comportarse de manera muy diferente que en su lugar de montaje definitivo.
 
 ---
 
-## Die häufigsten Fehler
+## Comprobar cables coaxiales, conectores y filtros
 
-> **GRAFIK 13:** Typische Messfehler mit Ursache und Lösung
+Para la atenuación de transmisión pura de un cable o filtro, usas S21. El objeto de prueba se conecta entre el Puerto 1 y el Puerto 2.
 
-### Nicht oder falsch kalibriert
+Para ello necesitas una calibración de dos puertos adecuada con un Thru definido.
 
-**Erkennbar an:** ungewöhnlichen Werten, unstabiler Kurve oder unplausibler Impedanz.
+### Filtros
 
-**Lösung:** Frequenzbereich festlegen, Kalibrierung zurücksetzen und an der richtigen Referenzebene neu kalibrieren.
+En un filtro, el S21 LOGMAG muestra:
 
-### Frequenzbereich zu groß
+- la banda de paso,
+- la banda de rechazo,
+- la atenuación de inserción,
+- las transiciones y frecuencias de corte,
+- en su caso, bandas laterales no deseadas.
 
-**Erkennbar an:** grober Kurve und leicht übersehbaren Minima.
+### Cables coaxiales
 
-**Lösung:** Erst einen Grobscan durchführen, dann den gewünschten Bereich enger einstellen und neu kalibrieren.
+En un cable, con una medición S21 adecuada puedes observar la atenuación de transmisión en función de la frecuencia. Sin embargo, un simple barrido S21 no indica automáticamente en qué punto está dañado un cable. Para su localización se requieren procedimientos adicionales como una representación en el dominio del tiempo y un factor de velocidad conocido.
 
-### Messkette nach der Kalibrierung verändert
+### Conectores y adaptadores
 
-**Erkennbar an:** veränderten Ergebnissen nach dem Wechsel eines Adapters oder Kabels.
+Si la curva cambia en cuanto tocas ligeramente un conector, a menudo hay un problema mecánico detrás:
 
-**Lösung:** Messkette vollständig aufbauen und anschließend neu kalibrieren.
+- contacto flojo,
+- conector hembra dañado,
+- conexión sucia,
+- adaptador inadecuado,
+- carga mecánica del puerto del NanoVNA.
 
-### Antenne in ungeeigneter Umgebung gemessen
-
-**Erkennbar an:** deutlichen Veränderungen beim Bewegen der Antenne oder beim Annähern von Personen.
-
-**Lösung:** Antenne möglichst in ihrer späteren Betriebsposition und mit Abstand zu störenden Gegenständen messen.
-
-### Nur auf SWR geschaut
-
-**Erkennbar an:** gutes SWR, aber unklare oder unerwartete Impedanz.
-
-**Lösung:** Zusätzlich S11 LOGMAG, R, X und Smith-Chart betrachten.
-
-### Stecker oder Antenne während der Messung bewegt
-
-**Erkennbar an:** springenden oder stark schwankenden Kurven.
-
-**Lösung:** Messaufbau fixieren, Zug auf den Anschlüssen vermeiden und während des Sweeps nichts berühren.
+Mantén la cadena de adaptadores tan corta y constante como sea posible.
 
 ---
 
-## Praxisrezept: Eine Antenne in wenigen Schritten prüfen
+## Interpretar correctamente los resultados de medición
 
-1. Lege den gewünschten Frequenzbereich fest.
-2. Baue die vollständige Messkette auf.
-3. Kalibriere an der vorgesehenen Referenzebene.
-4. Schließe die Antenne an Port 1 an.
-5. Zeige zunächst S11 LOGMAG oder SWR an.
-6. Setze den Marker auf das interessante Minimum.
-7. Lies Frequenz, SWR und S11 in dB ab.
-8. Prüfe R und X am gleichen Marker.
-9. Betrachte die Position im Smith-Chart.
-10. Verändere die Antenne nur in kleinen Schritten.
-11. Miss nach jeder Änderung erneut.
-12. Vergleiche die Kurven unter gleichen Bedingungen.
+Una sola curva bonita todavía no es un diagnóstico completo.
+
+### Buena resonancia, pero mal SWR
+
+Una antena puede ser resonante porque X está cerca de cero, pero aun así tener una resistencia que se desvía claramente de 50 ohmios.
+
+Entonces la antena es resonante, pero no está bien adaptada al sistema de 50 ohmios.
+
+### Buen SWR, pero mala antena
+
+Un SWR bajo también puede deberse a pérdidas. Un cable con muchas pérdidas o una construcción inadecuada pueden atenuar la energía reflejada y así mejorar la indicación en el aparato de medición.
+
+El aparato de medición ve entonces una buena adaptación, pero no necesariamente una irradiación efectiva.
+
+### Varios mínimos
+
+Varios mínimos pueden indicar diferentes resonancias. En antenas multibanda, esto suele ser deseable. Pero también puede deberse a la construcción, las líneas, el entorno o resonancias no deseadas.
+
+Por eso, no observes solo la profundidad de un mínimo, sino también:
+
+- su frecuencia,
+- la impedancia en el marcador,
+- la posición en la carta de Smith,
+- la repetibilidad de la medición.
 
 ---
 
-## Schnellreferenz
+## Los errores más frecuentes
 
-> **GRAFIK 15:** Druckbarer NanoVNA-Spickzettel
+![Figura 13: Errores típicos de medición con el NanoVNA, su causa y solución](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/4c7a6129cc.png)
 
-### Kalibrierung für eine Antennenmessung
+*Figura 13: Errores típicos de medición con el NanoVNA, su causa y solución*
 
-**Frequenzbereich setzen → Reset → Open → Short → Load → Done → Save**
+### No calibrar o calibrar mal
 
-### Zusätzlicher Schritt für S21
+**Reconocible por:** valores inusuales, curva inestable o impedancia inverosímil.
 
-**Thru durchführen und passende Zwei-Port-Kalibrierung verwenden.**
+**Solución:** definir el rango de frecuencias, restablecer la calibración y calibrar de nuevo en el plano de referencia correcto.
 
-### S11 LOGMAG und Return Loss
+### Rango de frecuencias demasiado grande
 
-| S11 LOGMAG | Return Loss | Einordnung |
+**Reconocible por:** una curva muy gruesa y mínimos que se pasan fácilmente por alto.
+
+**Solución:** hacer primero un barrido general, luego ajustar el rango deseado de forma más estrecha y calibrar de nuevo.
+
+### Cadena de medición modificada después de la calibración
+
+**Reconocible por:** resultados alterados después de cambiar un adaptador o un cable.
+
+**Solución:** montar completamente la cadena de medición y calibrar después.
+
+### Antena medida en un entorno inadecuado
+
+**Reconocible por:** cambios notables al mover la antena o al acercarse personas.
+
+**Solución:** medir la antena, si es posible, en su posición de operación posterior y con distancia a los objetos perturbadores.
+
+### Solo mirar el SWR
+
+**Reconocible por:** buen SWR, pero impedancia poco clara o inesperada.
+
+**Solución:** observar además el S11 LOGMAG, R, X y la carta de Smith.
+
+### Mover el conector o la antena durante la medición
+
+**Reconocible por:** una curva que salta o fluctúa fuertemente.
+
+**Solución:** fijar la configuración de medición, evitar tracción en las conexiones y no tocar nada durante el barrido.
+
+---
+
+## Receta práctica: comprobar una antena en pocos pasos
+
+1. Define el rango de frecuencias deseado.
+2. Monta la cadena de medición completa.
+3. Calibra en el plano de referencia previsto.
+4. Conecta la antena al Puerto 1.
+5. Muestra primero S11 LOGMAG o SWR.
+6. Coloca el marcador en el mínimo interesante.
+7. Lee la frecuencia, el SWR y el S11 en dB.
+8. Comprueba R y X en el mismo marcador.
+9. Observa la posición en la carta de Smith.
+10. Modifica la antena solo en pequeños pasos.
+11. Mide de nuevo después de cada cambio.
+12. Compara las curvas bajo las mismas condiciones.
+
+---
+
+## Referencia rápida
+
+![Figura 15: Chuleta imprimible del NanoVNA](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/70eea94b4c.png)
+
+*Figura 15: Chuleta imprimible del NanoVNA*
+
+### Calibración para una medición de antena
+
+**Ajustar rango de frecuencias → Reset → Open → Short → Load → Done → Save**
+
+### Paso adicional para S21
+
+**Realizar Thru y usar una calibración de dos puertos adecuada.**
+
+### S11 LOGMAG y Return Loss
+
+| S11 LOGMAG | Return Loss | Clasificación |
 |---:|---:|---|
-| -6 dB | 6 dB | schwache Anpassung |
-| -10 dB | 10 dB | meist brauchbar |
-| -15 dB | 15 dB | gut |
-| -20 dB | 20 dB | sehr gut |
-| -30 dB | 30 dB | ausgezeichnet, wenn zuverlässig messbar |
+| -6 dB | 6 dB | adaptación débil |
+| -10 dB | 10 dB | generalmente utilizable |
+| -15 dB | 15 dB | buena |
+| -20 dB | 20 dB | muy buena |
+| -30 dB | 30 dB | excelente, si se puede medir de forma fiable |
 
-### Ungefähre Zuordnung zum SWR
+### Correspondencia aproximada con el SWR
 
 | SWR | Return Loss |
 |---:|---:|
@@ -591,47 +620,49 @@ Betrachte deshalb nicht nur die Tiefe eines Minimums, sondern auch:
 | 1,2 | 20,8 dB |
 | 1,1 | 26,4 dB |
 
-### Welche Anzeige wofür?
+### ¿Qué indicación para qué?
 
-| Aufgabe | Sinnvolle Anzeige |
+| Tarea | Indicación útil |
 |---|---|
-| Schneller Überblick | SWR |
-| Reflexion in dB vergleichen | S11 LOGMAG |
-| Resonanz bestätigen | X und S11 |
-| Impedanz beurteilen | R + jX |
-| Anpassungsrichtung erkennen | Smith-Chart |
-| Filter messen | S21 LOGMAG |
-| Kabeldämpfung messen | S21 LOGMAG |
-| Bandbreite bestimmen | Zwei Marker und festgelegter Grenzwert |
+| Visión general rápida | SWR |
+| Comparar la reflexión en dB | S11 LOGMAG |
+| Confirmar la resonancia | X y S11 |
+| Evaluar la impedancia | R + jX |
+| Reconocer la dirección de adaptación | Carta de Smith |
+| Medir filtros | S21 LOGMAG |
+| Medir la atenuación de cables | S21 LOGMAG |
+| Determinar el ancho de banda | Dos marcadores y un límite definido |
 
 ---
 
-## Der optimale NanoVNA-Workflow
+## El flujo de trabajo óptimo con el NanoVNA
 
-> **GRAFIK 14:** Vollständiger Arbeitsablauf vom Frequenzbereich bis zur Kontrollmessung
+![Figura 14: Flujo de trabajo recomendado del NanoVNA desde la calibración hasta la medición de control](https://raw.githubusercontent.com/gh4chris/nanoNVA-de/main/images/b8e89fa70c.png)
 
-1. Gewünschten Frequenzbereich festlegen.
-2. Messkette vollständig aufbauen.
-3. An der richtigen Referenzebene kalibrieren.
-4. Prüfling anschließen, ohne die Messkette zu verändern.
-5. Mit SWR oder S11 LOGMAG einen Überblick gewinnen.
-6. Marker auf die interessante Stelle setzen.
-7. Frequenz, R, X und Smith-Chart gemeinsam betrachten.
-8. Nur eine Änderung auf einmal vornehmen.
-9. Unter denselben Bedingungen erneut messen.
-10. Vorher- und Nachher-Ergebnis vergleichen.
+*Figura 14: Flujo de trabajo recomendado del NanoVNA desde la calibración hasta la medición de control*
 
-Mit diesem Ablauf vermeidest du die häufigsten Anfängerfehler. Vor allem lernst du, Kurven nicht nur anzusehen, sondern daraus eine sinnvolle nächste Handlung abzuleiten.
+1. Definir el rango de frecuencias deseado.
+2. Montar completamente la cadena de medición.
+3. Calibrar en el plano de referencia correcto.
+4. Conectar el objeto de prueba sin modificar la cadena de medición.
+5. Obtener una visión general con SWR o S11 LOGMAG.
+6. Colocar el marcador en el punto interesante.
+7. Observar frecuencia, R, X y la carta de Smith en conjunto.
+8. Hacer solo un cambio a la vez.
+9. Medir de nuevo bajo las mismas condiciones.
+10. Comparar el resultado antes y después.
 
-Der NanoVNA nimmt dir das Denken nicht ab. Er macht aber sichtbar, was an Antenne, Kabel und HF-Bauteilen tatsächlich geschieht. Genau darin liegt sein größter Nutzen.
+Con este procedimiento evitas los errores más frecuentes de los principiantes. Sobre todo, aprendes a no solo mirar las curvas, sino a deducir de ellas una acción siguiente sensata.
+
+El NanoVNA no hace el pensamiento por ti. Pero hace visible lo que realmente sucede en la antena, los cables y los componentes de RF. Precisamente ahí radica su mayor utilidad.
 
 ---
 
-## Quellen und weiterführende Informationen
+## Fuentes e información adicional
 
-- [NanoVNA Praxisguide für echte Messungen – NextTechWorld](https://nexttechworld.com/de/amateurfunk/nanovna-praxisguide/)
+- [Guía práctica del NanoVNA para mediciones reales – NextTechWorld](https://nexttechworld.com/de/amateurfunk/nanovna-praxisguide/)
 - [NanoVNA Setup Guide: Calibration, SWR, Smith Chart and Antenna Testing – SDRStore](https://www.sdrstore.eu/nanovna-setup-guide-calibration-swr-smith-chart-antenna-testing/?sl=de)
-- [SWR messen mit dem NanoVNA – VESAB (PDF)](https://www.vesab.de/wpvesab/wp-content/uploads/SWR_messen_V01_2022_10_13.pdf)
-- [NanoVNA – Der Antenne unter den Rock geschaut – Björns Techblog](https://www.bjoerns-techblog.de/2019/11/nanovna-der-antenne-unter-den-rock-geschaut/)
+- [Medir el SWR con el NanoVNA – VESAB (PDF)](https://www.vesab.de/wpvesab/wp-content/uploads/SWR_messen_V01_2022_10_13.pdf)
+- [NanoVNA – Un vistazo bajo la falda de la antena – Björns Techblog](https://www.bjoerns-techblog.de/2019/11/nanovna-der-antenne-unter-den-rock-geschaut/)
 
-> Die Grafik-Platzhalter **GRAFIK 1 bis GRAFIK 15** markieren die festgelegten Positionen für die eigens gerenderten Illustrationen. Die Grafiken werden nicht aus den Quellen übernommen.
+---
